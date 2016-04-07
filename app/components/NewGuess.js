@@ -1,4 +1,4 @@
-System.register(['angular2/core', "../services/GuessingService", "../Model/Guess"], function(exports_1, context_1) {
+System.register(['angular2/core', "../services/GameManagerService", "../Model/Guess"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,15 +10,15 @@ System.register(['angular2/core', "../services/GuessingService", "../Model/Guess
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, GuessingService_1, Guess_1;
+    var core_1, GameManagerService_1, Guess_1;
     var NewGuess;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (GuessingService_1_1) {
-                GuessingService_1 = GuessingService_1_1;
+            function (GameManagerService_1_1) {
+                GameManagerService_1 = GameManagerService_1_1;
             },
             function (Guess_1_1) {
                 Guess_1 = Guess_1_1;
@@ -49,7 +49,7 @@ System.register(['angular2/core', "../services/GuessingService", "../Model/Guess
                         selector: 'new-guess',
                         template: "<div style=\"clear:both;\">\n<select  [(ngModel)]=\"color1\"  style=\"background-color:{{color1}};\" >\n<option *ngFor=\"#color of colorOptions\">{{color}}</option>\n</select>\n<select  [(ngModel)]=\"color2\"  style=\"background-color:{{color2}};\" >\n<option *ngFor=\"#color of colorOptions\">{{color}}</option>\n</select>\n<select  [(ngModel)]=\"color3\"  style=\"background-color:{{color3}};\" >\n<option *ngFor=\"#color of colorOptions\">{{color}}</option>\n</select>\n<select  [(ngModel)]=\"color4\"  style=\"background-color:{{color4}};\" >\n<option *ngFor=\"#color of colorOptions\">{{color}}</option>\n</select>\n<button (click)=\"SendNewGuess()\">Guess</button>\n               </div>     "
                     }), 
-                    __metadata('design:paramtypes', [GuessingService_1.GuessingService])
+                    __metadata('design:paramtypes', [GameManagerService_1.GameManagerService])
                 ], NewGuess);
                 return NewGuess;
             }());
@@ -57,4 +57,4 @@ System.register(['angular2/core', "../services/GuessingService", "../Model/Guess
         }
     }
 });
-//# sourceMappingURL=NuewGuess.js.map
+//# sourceMappingURL=NewGuess.js.map

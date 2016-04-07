@@ -2,7 +2,7 @@
  * Created by ranwahle on 22/03/2016.
  */
 import {Component} from 'angular2/core';
-import {NewGuess} from './NuewGuess';
+import {NewGuess} from './NewGuess';
 import {Guess} from './../Model/Guess';
 import  {GuessDetails} from './GuessDetails'
 

@@ -5,14 +5,54 @@ import {Injectable} from 'angular2/core';
 import {Guess} from '../Model/Guess';
 
 @Injectable()
-export class GuessingService{
+export class GameManagerService{
     colorTable: any;
     chosenColors: any;
+    gameStart: any;
+    timerTickCallbacks: any;
+    gameStopped: boolean;
     constructor(){
         this.colorTable = ['black', 'white', 'yellow'
         , 'green', 'red', 'blue', 'pink', 'brown'
-        ,'orange', 'purple']
+        ,'orange', 'purple'];
+
+        this.timerTickCallbacks = [];
     }
+
+    runCallbacks(){
+        this.timerTickCallbacks.forEach(callbackObj =>{
+            callbackObj.callback.call(callbackObj.context, this.gameStart);
+        });
+        if (!this.gameStopped)
+        {
+            setTimeout(() =>{
+                this.runCallbacks();
+            }, 1000);
+        }
+    }
+
+    startGame(){
+        this.randomColors();
+        this.startTimer();
+    }
+
+    timerTickSubscribe(callback, context){
+        this.timerTickCallbacks.push({callback: callback, context: context});
+    }
+
+    startTimer(){
+        this.gameStart = new Date();
+        setTimeout( () => {
+            this.runCallbacks();
+
+        }, 1000);
+
+    }
+
+    stopTimer(){
+        this.gameStopped = true;
+    }
+
 
     getOptions(){
         return this.colorTable;
@@ -35,6 +75,12 @@ export class GuessingService{
                 }
 
             }
+        }
+
+        if (result.filter(guessResult => guessResult === 'hit').length
+            === this.chosenColors.length)
+        {
+            this.stopTimer();
         }
         return result;
     }

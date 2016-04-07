@@ -1,4 +1,4 @@
-System.register(['angular2/core', './GuessingGrid.component', "../services/GuessingService"], function(exports_1, context_1) {
+System.register(['angular2/core', './GuessingGrid.component', "../services/GameManagerService", "../pipes/timespanPipe"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', './GuessingGrid.component', "../services/Guess
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, GuessingGrid_component_1, GuessingService_1;
+    var core_1, GuessingGrid_component_1, GameManagerService_1, timespanPipe_1;
     var AppComponent;
     return {
         setters:[
@@ -20,21 +20,34 @@ System.register(['angular2/core', './GuessingGrid.component', "../services/Guess
             function (GuessingGrid_component_1_1) {
                 GuessingGrid_component_1 = GuessingGrid_component_1_1;
             },
-            function (GuessingService_1_1) {
-                GuessingService_1 = GuessingService_1_1;
+            function (GameManagerService_1_1) {
+                GameManagerService_1 = GameManagerService_1_1;
+            },
+            function (timespanPipe_1_1) {
+                timespanPipe_1 = timespanPipe_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent() {
+                function AppComponent(_gameManager) {
+                    this._gameManager = _gameManager;
                 }
+                AppComponent.prototype.handleTimerTick = function (gameStart) {
+                    var newDate = new Date();
+                    this.gameLength = newDate - gameStart;
+                };
+                AppComponent.prototype.startGame = function () {
+                    this._gameManager.startGame();
+                    this._gameManager.timerTickSubscribe(this.handleTimerTick, this);
+                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "<h1>Color guessing game 2</h1> <guessing-grid>Loading...</guessing-grid>",
+                        template: "<h1>Color guessing game 2</h1> <guessing-grid>Loading...</guessing-grid>\n        <button (click)=\"startGame()\">Start game</button>\n        <span [textContent]=\"gameLength | timespan\"></span>",
                         directives: [GuessingGrid_component_1.GuessingGrid],
-                        providers: [GuessingService_1.GuessingService]
+                        providers: [GameManagerService_1.GameManagerService],
+                        pipes: [timespanPipe_1.TimeSpanPipe]
                     }), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [GameManagerService_1.GameManagerService])
                 ], AppComponent);
                 return AppComponent;
             }());

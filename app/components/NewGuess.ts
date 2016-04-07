@@ -2,9 +2,9 @@
  * Created by ranwahle on 30/03/2016.
  */
 import {Component, Output, EventEmitter} from 'angular2/core';
-import {GuessingService} from "../services/GuessingService";
+import {GameManagerService} from "../services/GameManagerService";
 import {Guess} from "../Model/Guess";
-import {GuessingResult} from "../Model/GuessingResult";
+
 
 @Component({
         selector: 'new-guess',
@@ -34,7 +34,7 @@ export class NewGuess{
     public  color4: string;
     colorOptions: any;
 
-    constructor(private guessingService: GuessingService){
+    constructor(private guessingService: GameManagerService){
         this.colorOptions = guessingService.getOptions();
 
     }
