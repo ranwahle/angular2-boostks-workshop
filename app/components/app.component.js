@@ -1,4 +1,4 @@
-System.register(['angular2/core', './GuessingGrid.component', "../services/GameManagerService", "../pipes/timespanPipe"], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './RegisterComponent', './GameComponent', '../services/GameManagerService'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,44 +10,48 @@ System.register(['angular2/core', './GuessingGrid.component', "../services/GameM
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, GuessingGrid_component_1, GameManagerService_1, timespanPipe_1;
+    var core_1, router_1, RegisterComponent_1, GameComponent_1, GameManagerService_1;
     var AppComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (GuessingGrid_component_1_1) {
-                GuessingGrid_component_1 = GuessingGrid_component_1_1;
+            function (router_1_1) {
+                router_1 = router_1_1;
+            },
+            function (RegisterComponent_1_1) {
+                RegisterComponent_1 = RegisterComponent_1_1;
+            },
+            function (GameComponent_1_1) {
+                GameComponent_1 = GameComponent_1_1;
             },
             function (GameManagerService_1_1) {
                 GameManagerService_1 = GameManagerService_1_1;
-            },
-            function (timespanPipe_1_1) {
-                timespanPipe_1 = timespanPipe_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
-                function AppComponent(_gameManager) {
-                    this._gameManager = _gameManager;
+                function AppComponent() {
                 }
-                AppComponent.prototype.handleTimerTick = function (gameStart) {
-                    var newDate = new Date();
-                    this.gameLength = newDate - gameStart;
-                };
-                AppComponent.prototype.startGame = function () {
-                    this._gameManager.startGame();
-                    this._gameManager.timerTickSubscribe(this.handleTimerTick, this);
-                };
                 AppComponent = __decorate([
                     core_1.Component({
                         selector: 'my-app',
-                        template: "<h1>Color guessing game 2</h1> <guessing-grid>Loading...</guessing-grid>\n        <button (click)=\"startGame()\">Start game</button>\n        <span [textContent]=\"gameLength | timespan\"></span>",
-                        directives: [GuessingGrid_component_1.GuessingGrid],
-                        providers: [GameManagerService_1.GameManagerService],
-                        pipes: [timespanPipe_1.TimeSpanPipe]
-                    }), 
-                    __metadata('design:paramtypes', [GameManagerService_1.GameManagerService])
+                        template: "<h1>Color guessing game 2</h1>\n     <nav>\n    <a [routerLink]=\"['Register']\">Register</a>\n    <a [routerLink]=\"['Game']\">Game</a>\n  </nav>\n <router-outlet></router-outlet>\n ",
+                        directives: [router_1.ROUTER_DIRECTIVES],
+                        providers: [router_1.ROUTER_PROVIDERS, GameManagerService_1.GameManagerService]
+                    }),
+                    router_1.RouteConfig([
+                        {
+                            path: '/Register',
+                            name: 'Register',
+                            component: RegisterComponent_1.RegisterComponent
+                        }, {
+                            path: '/Game',
+                            name: 'Game',
+                            component: GameComponent_1.GameComponent
+                        }
+                    ]), 
+                    __metadata('design:paramtypes', [])
                 ], AppComponent);
                 return AppComponent;
             }());

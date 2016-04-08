@@ -48,7 +48,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     this.gameStart = new Date();
                     setTimeout(function () {
                         _this.runCallbacks();
-                    }, 1000);
+                    });
                 };
                 GameManagerService.prototype.stopTimer = function () {
                     this.gameStopped = true;
@@ -58,7 +58,7 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                 };
                 GameManagerService.prototype.calcGuess = function (guess) {
                     if (!this.chosenColors) {
-                        this.randomColors();
+                        return ['Please start game'];
                     }
                     var result = [];
                     for (var i = 0; i < guess.colors.length; i++) {

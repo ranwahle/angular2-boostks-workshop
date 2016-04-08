@@ -11,6 +11,7 @@ export class GameManagerService{
     gameStart: any;
     timerTickCallbacks: any;
     gameStopped: boolean;
+    gamerName: string;
     constructor(){
         this.colorTable = ['black', 'white', 'yellow'
         , 'green', 'red', 'blue', 'pink', 'brown'
@@ -31,6 +32,8 @@ export class GameManagerService{
         }
     }
 
+    
+
     startGame(){
         this.randomColors();
         this.startTimer();
@@ -45,7 +48,7 @@ export class GameManagerService{
         setTimeout( () => {
             this.runCallbacks();
 
-        }, 1000);
+        });
 
     }
 
@@ -61,7 +64,7 @@ export class GameManagerService{
     calcGuess(guess:Guess) : string[]{
         if (!this.chosenColors)
         {
-            this.randomColors();
+            return ['Please start game'];
         }
         var result:string[] = [];
         for (var i = 0; i < guess.colors.length; i++){
