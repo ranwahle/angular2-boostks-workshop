@@ -1,4 +1,4 @@
-System.register(['angular2/core'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/http'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,16 +10,20 @@ System.register(['angular2/core'], function(exports_1, context_1) {
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1;
+    var core_1, http_1;
     var GameManagerService;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
             }],
         execute: function() {
             GameManagerService = (function () {
-                function GameManagerService() {
+                function GameManagerService(_http) {
+                    this._http = _http;
                     this.colorTable = ['black', 'white', 'yellow',
                         'green', 'red', 'blue', 'pink', 'brown',
                         'orange', 'purple'];
@@ -75,8 +79,13 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     if (result.filter(function (guessResult) { return guessResult === 'hit'; }).length
                         === this.chosenColors.length) {
                         this.stopTimer();
+                        this.finishGame();
                     }
                     return result;
+                };
+                GameManagerService.prototype.finishGame = function () {
+                    this._http.post('http://localhost:8080/api/finishGame', JSON.stringify({ name: this.gamerName,
+                    })).toPromise();
                 };
                 GameManagerService.prototype.searchForMisses = function (color) {
                     return this.chosenColors.indexOf(color) >= 0;
@@ -91,11 +100,29 @@ System.register(['angular2/core'], function(exports_1, context_1) {
                     }
                     this.chosenColors = result;
                 };
+                GameManagerService.prototype.registerGamer = function (name) {
+                    var self = this;
+                    return this._http.post('http://localhost:8080/api', JSON.stringify({ name: name, date: new Date() }))
+                        .toPromise()
+                        .catch(function (err) { return console.log(err); }).then(function (response) {
+                        console.log(response);
+                        self.gamerName = name;
+                    });
+                    // .map(result => {
+                    //     return <string>result.json().data;
+                    // })
+                    // .subscribe(data => {
+                    //     this.gamerName = data;
+                    //
+                    // })
+                    ;
+                };
                 GameManagerService = __decorate([
                     core_1.Injectable(), 
-                    __metadata('design:paramtypes', [])
+                    __metadata('design:paramtypes', [(typeof (_a = typeof http_1.Http !== 'undefined' && http_1.Http) === 'function' && _a) || Object])
                 ], GameManagerService);
                 return GameManagerService;
+                var _a;
             }());
             exports_1("GameManagerService", GameManagerService);
         }

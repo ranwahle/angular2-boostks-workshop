@@ -1,4 +1,4 @@
-System.register(['angular2/core', 'angular2/router', './RegisterComponent', './GameComponent', '../services/GameManagerService'], function(exports_1, context_1) {
+System.register(['angular2/core', 'angular2/router', './RegisterComponent', './GameComponent', '../services/GameManagerService', 'angular2/http'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', 'angular2/router', './RegisterComponent', './G
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, router_1, RegisterComponent_1, GameComponent_1, GameManagerService_1;
+    var core_1, router_1, RegisterComponent_1, GameComponent_1, GameManagerService_1, http_1;
     var AppComponent;
     return {
         setters:[
@@ -28,6 +28,9 @@ System.register(['angular2/core', 'angular2/router', './RegisterComponent', './G
             },
             function (GameManagerService_1_1) {
                 GameManagerService_1 = GameManagerService_1_1;
+            },
+            function (http_1_1) {
+                http_1 = http_1_1;
             }],
         execute: function() {
             AppComponent = (function () {
@@ -38,7 +41,7 @@ System.register(['angular2/core', 'angular2/router', './RegisterComponent', './G
                         selector: 'my-app',
                         template: "<h1>Color guessing game 2</h1>\n     <nav>\n    <a [routerLink]=\"['Register']\">Register</a>\n    <a [routerLink]=\"['Game']\">Game</a>\n  </nav>\n <router-outlet></router-outlet>\n ",
                         directives: [router_1.ROUTER_DIRECTIVES],
-                        providers: [router_1.ROUTER_PROVIDERS, GameManagerService_1.GameManagerService]
+                        providers: [http_1.HTTP_PROVIDERS, router_1.ROUTER_PROVIDERS, GameManagerService_1.GameManagerService]
                     }),
                     router_1.RouteConfig([
                         {

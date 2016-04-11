@@ -5,7 +5,12 @@ import {PipeTransform, Pipe} from "angular2/core";
 @Pipe({name: 'hitMiss'})
 
 export class HitMissPipe implements  PipeTransform{
-    transform(value: string) : string{
-        return value + '|';
+    transform(value: string, args) : string{
+        var result:string = value;
+        var numberOfPipes:number = args[0];
+        for  (var i:number = 0; i < numberOfPipes; i++){
+            result += '|';
+        }
+        return result;
     }
 }

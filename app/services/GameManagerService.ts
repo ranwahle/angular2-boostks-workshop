@@ -3,6 +3,9 @@
  */
 import {Injectable} from 'angular2/core';
 import {Guess} from '../Model/Guess';
+import {Http} from 'angular2/http';
+import {Observable}     from 'rxjs/Observable';
+import {Headers, RequestOptions} from 'angular2/http';
 
 @Injectable()
 export class GameManagerService{
@@ -12,7 +15,7 @@ export class GameManagerService{
     timerTickCallbacks: any;
     gameStopped: boolean;
     gamerName: string;
-    constructor(){
+    constructor(private _http:Http){
         this.colorTable = ['black', 'white', 'yellow'
         , 'green', 'red', 'blue', 'pink', 'brown'
         ,'orange', 'purple'];
@@ -40,7 +43,8 @@ export class GameManagerService{
     }
 
     timerTickSubscribe(callback, context){
-        this.timerTickCallbacks.push({callback: callback, context: context});
+        this.timerTickCallbacks.push({callback:
+        callback, context: context});
     }
 
     startTimer(){
@@ -84,8 +88,15 @@ export class GameManagerService{
             === this.chosenColors.length)
         {
             this.stopTimer();
+            this.finishGame();
         }
         return result;
+    }
+
+    finishGame(){
+        this._http.post('http://localhost:8080/api/finishGame',
+            JSON.stringify({name: this.gamerName,
+       }) ).toPromise();
     }
 
     searchForMisses(color:string) : boolean{
@@ -102,5 +113,34 @@ export class GameManagerService{
        }
         this.chosenColors = result;
     }
+
+    registerGamer(name:string){
+        let self = this;
+      return  this._http.post('http://localhost:8080/api',
+          JSON.stringify( {name: name, date: new Date()}))
+    .toPromise()
+            .catch(err => console.log(err)).then(response => {
+            console.log(response);
+            self.gamerName = name;
+
+        });
+          // .map(result => {
+          //     return <string>result.json().data;
+          // })
+          // .subscribe(data => {
+          //     this.gamerName = data;
+          //
+          // })
+;
+    }
+
+    // registerGamer(name:string) {
+    //     let body = JSON.stringify({name});
+    //     return  this._http.post('http://localhost:8080/api', body)
+    //         .do(data =>
+    //             console.log(data))
+    //         .map(response => <string>response.json().data)
+    //         .subscribe(data => this.gamerName = data);
+    // }
 
 }

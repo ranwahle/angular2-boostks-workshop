@@ -1,4 +1,4 @@
-System.register(['angular2/core', "../services/GameManagerService", "../Model/Guess"], function(exports_1, context_1) {
+System.register(['angular2/core', "../services/GameManagerService", "../Model/Guess", "../directives/BlinkingDiv"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,7 +10,7 @@ System.register(['angular2/core', "../services/GameManagerService", "../Model/Gu
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, GameManagerService_1, Guess_1;
+    var core_1, GameManagerService_1, Guess_1, BlinkingDiv_1;
     var NewGuess;
     return {
         setters:[
@@ -22,6 +22,9 @@ System.register(['angular2/core', "../services/GameManagerService", "../Model/Gu
             },
             function (Guess_1_1) {
                 Guess_1 = Guess_1_1;
+            },
+            function (BlinkingDiv_1_1) {
+                BlinkingDiv_1 = BlinkingDiv_1_1;
             }],
         execute: function() {
             NewGuess = (function () {
@@ -47,7 +50,8 @@ System.register(['angular2/core', "../services/GameManagerService", "../Model/Gu
                 NewGuess = __decorate([
                     core_1.Component({
                         selector: 'new-guess',
-                        template: "<div style=\"clear:both;\">\n<select  [(ngModel)]=\"color1\"  style=\"background-color:{{color1}};\" >\n<option *ngFor=\"#color of colorOptions\">{{color}}</option>\n</select>\n<select  [(ngModel)]=\"color2\"  style=\"background-color:{{color2}};\" >\n<option *ngFor=\"#color of colorOptions\">{{color}}</option>\n</select>\n<select  [(ngModel)]=\"color3\"  style=\"background-color:{{color3}};\" >\n<option *ngFor=\"#color of colorOptions\">{{color}}</option>\n</select>\n<select  [(ngModel)]=\"color4\"  style=\"background-color:{{color4}};\" >\n<option *ngFor=\"#color of colorOptions\">{{color}}</option>\n</select>\n<button (click)=\"SendNewGuess()\">Guess</button>\n               </div>     "
+                        template: "<div style=\"clear:both;\">\n<select  [(ngModel)]=\"color1\"  style=\"background-color:{{color1}};\" >\n<option *ngFor=\"#color of colorOptions\">{{color}}</option>\n</select>\n<select  [(ngModel)]=\"color2\"  style=\"background-color:{{color2}};\" >\n<option *ngFor=\"#color of colorOptions\">{{color}}</option>\n</select>\n<select  [(ngModel)]=\"color3\"  style=\"background-color:{{color3}};\" >\n<option *ngFor=\"#color of colorOptions\">{{color}}</option>\n</select>\n<select  [(ngModel)]=\"color4\"  style=\"background-color:{{color4}};\" >\n<option *ngFor=\"#color of colorOptions\">{{color}}</option>\n</select>\n<button  (click)=\"SendNewGuess()\">Guess</button>\n               </div>     ",
+                        directives: [BlinkingDiv_1.BlinkingDiv]
                     }), 
                     __metadata('design:paramtypes', [GameManagerService_1.GameManagerService])
                 ], NewGuess);

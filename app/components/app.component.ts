@@ -2,11 +2,13 @@
  * Created by ranwahle on 20/03/2016.
  */
 import {Component} from 'angular2/core';
-
-import { RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS } from 'angular2/router';
+import { RouteConfig, ROUTER_DIRECTIVES,
+    ROUTER_PROVIDERS } from 'angular2/router';
 import  {RegisterComponent} from './RegisterComponent'
 import {GameComponent} from './GameComponent'
 import {GameManagerService} from '../services/GameManagerService'
+import {HTTP_PROVIDERS}    from 'angular2/http';
+
 @Component({
     selector: 'my-app',
     template: `<h1>Color guessing game 2</h1>
@@ -17,7 +19,7 @@ import {GameManagerService} from '../services/GameManagerService'
  <router-outlet></router-outlet>
  `,
     directives: [ROUTER_DIRECTIVES],
-    providers: [ ROUTER_PROVIDERS,GameManagerService]
+    providers: [HTTP_PROVIDERS, ROUTER_PROVIDERS,GameManagerService]
 
 
 })

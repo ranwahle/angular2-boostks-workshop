@@ -1,4 +1,4 @@
-System.register(['angular2/core', "../pipes/HitMissPipe"], function(exports_1, context_1) {
+System.register(['angular2/core', './NewGuess'], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -10,33 +10,35 @@ System.register(['angular2/core', "../pipes/HitMissPipe"], function(exports_1, c
     var __metadata = (this && this.__metadata) || function (k, v) {
         if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
     };
-    var core_1, HitMissPipe_1;
-    var GuessDetails;
+    var core_1, NewGuess_1;
+    var GameComponent;
     return {
         setters:[
             function (core_1_1) {
                 core_1 = core_1_1;
             },
-            function (HitMissPipe_1_1) {
-                HitMissPipe_1 = HitMissPipe_1_1;
+            function (NewGuess_1_1) {
+                NewGuess_1 = NewGuess_1_1;
             }],
         execute: function() {
-            GuessDetails = (function () {
-                function GuessDetails() {
+            GameComponent = (function () {
+                function GameComponent() {
                 }
-                GuessDetails = __decorate([
+                GameComponent.prototype.guess = function (data) {
+                    console.log(data);
+                };
+                GameComponent = __decorate([
                     core_1.Component({
-                        selector: 'guess-details',
-                        template: "<div style=\"clear:both;\">\n<div *ngFor=\"#color of guess.guess.colors\" \n        class=\"guessCell\" style=\"background-color:{{color}};min-width: 25px; min-height: 25px;\">\n        </div>\n        <div *ngFor=\"#result of guess.result\" [textContent]=\"result | hitMiss:4 \" style=\"float:left;\"></div>\n        </div>",
-                        inputs: ['guess'],
-                        pipes: [HitMissPipe_1.HitMissPipe]
+                        selector: 'game-component',
+                        template: "<h2>Game</h2>\n<new-guess (guessed)=\"guess($event)\"></new-guess>",
+                        directives: [NewGuess_1.NewGuess]
                     }), 
                     __metadata('design:paramtypes', [])
-                ], GuessDetails);
-                return GuessDetails;
+                ], GameComponent);
+                return GameComponent;
             }());
-            exports_1("GuessDetails", GuessDetails);
+            exports_1("GameComponent", GameComponent);
         }
     }
 });
-//# sourceMappingURL=GuessDetails.js.map
+//# sourceMappingURL=GameComponent.js.map

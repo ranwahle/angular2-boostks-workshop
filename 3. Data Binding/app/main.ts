@@ -3,8 +3,7 @@
  */
 import {bootstrap}    from 'angular2/platform/browser';
 import {AppComponent} from './components/app.component';
-import {upgradeAdapter} from './upgradeAdapter';
-import 'rxjs/Rx';
+
 
 bootstrap(AppComponent);
 

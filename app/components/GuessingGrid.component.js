@@ -34,7 +34,7 @@ System.register(['angular2/core', './NewGuess', './GuessDetails'], function(expo
                 GuessingGrid = __decorate([
                     core_1.Component({
                         selector: 'guessing-grid',
-                        template: "<h2>Guess</h2>\n\n<div *ngFor=\"#guess of guesses\">\n<guess-details [guess]=\"guess\">Loading...</guess-details>\n</div>\n\n            <new-guess [guess]=\"guess\" (guessed)=\"onGuessed($event)\">Loading...</new-guess>",
+                        template: "<h2>Guess</h2>\n\n<div *ngFor=\"#guess of guesses\">\n<guess-details [guess]=\"guess\">Loading...\n</guess-details>\n</div>\n\n            <new-guess [guess]=\"guess\" (guessed)=\"onGuessed($event)\">Loading...</new-guess>",
                         directives: [GuessDetails_1.GuessDetails, NewGuess_1.NewGuess]
                     }), 
                     __metadata('design:paramtypes', [])

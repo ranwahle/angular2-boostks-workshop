@@ -11,7 +11,8 @@ import  {GuessDetails} from './GuessDetails'
     template: `<h2>Guess</h2>
 
 <div *ngFor="#guess of guesses">
-<guess-details [guess]="guess">Loading...</guess-details>
+<guess-details [guess]="guess">Loading...
+</guess-details>
 </div>
 
             <new-guess [guess]="guess" (guessed)="onGuessed($event)">Loading...</new-guess>`,
